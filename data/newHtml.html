@@ -1,0 +1,84 @@
+
+
+
+
+<html>
+	<head>
+	<base target="_self"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>出错页面</title>
+		<style type="text/css">
+<!--
+body {
+	margin-top: 50px;
+}
+-->
+</style>
+	</head>
+
+	<body>
+		<div align="center">
+			<table width="50%" border="0">
+				<tr>
+					<td>
+						<div align="center">
+							<img src="/framework/images/chucuole.gif" width="105" height="110">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td height="50px">
+						<div align="center">
+							<font color="blue">用户没有登录，请重新登录！</font>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<form action="" id="relogonForm" method="post">
+		</form>
+	</body>
+<script language='javascript'>
+function errForward(msg){
+	//alert(msg);
+	//parent.location.href='/';
+}
+var errorKey = '用户没有登录，请重新登录！';
+if (errorKey != '')
+ 	errForward(errorKey);
+ 	
+ 	
+ 	var flag='1';
+if(flag=='1' || flag=='2' ){
+try{
+window.parent.parent.relogon();
+var iID=setInterval(function(){
+if(window.parent.parent.getLogon()){
+clearInterval(iID);
+window.location.reload();
+}
+}, 500);
+
+}catch(e){
+try{
+window.parent.parent.parent.relogon();
+var iID=setInterval(function(){
+if(window.parent.parent.parent.getLogon()){
+clearInterval(iID);
+window.location.reload();
+}
+}, 500);
+}catch(e){
+if(window.confirm("您登录后过长时间没有操作或您的用户名已经在别处登录，请重新输入帐号，密码后，继续操作！")){
+relogonForm.submit();
+}else{
+window.close();
+}
+}
+
+}
+}
+
+
+</script>
+</html>
